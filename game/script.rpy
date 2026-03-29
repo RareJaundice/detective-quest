@@ -12,45 +12,46 @@ default stat_burl = 0
 default stat_wits = 0
 default stat_charm = 0
 default stat_dex = 0
+default roll = 0
 
 init python:
-    def d20roll(mod, dc):
+    def d20roll(mod):
         roll = renpy.random.randint(1, 20) + mod
-        if roll >= dc:
-            success = True
-        else:
-            success = False
-        return success
+        return roll
 
 # The game starts here.
 
 label start:
     
     scene bg bar
+    show bar zorder 1
     
     "Another long night at the Rusty Pale."
     "One last round, then I gotta pack it up for the night"
     
+    show mike zorder 0:
+        linear 0.2 xpos 0.33 ypos -3
+
     menu:
         "What's it gonna be, Doc?"
         
         "Whiskey (+ BURLINESS)":
             "Coming right up."
-            show whiskey
+            show whiskey zorder 2
             "That's the stuff."
             hide whiskey with Dissolve(1)
             $ stat_burl += 1
             
         "Beer (+ RESOLVE)":
             "On it, boss."
-            show beer
+            show beer zorder 2
             "That's what I'm talking about."
             hide beer with Dissolve(1)
-            $ stat_dex += 1
+            $ stat_dex += 25
             
         "Pina Colada (+ APPEAL)":
             "Gettin' fruity with it, eh?"
-            show pinacolada
+            show pinacolada zorder 2
             "Where's my tiny umbrella?"
             "We're out of the umbrellas."
             "Can I at least get a toothpick sword?"
@@ -62,16 +63,22 @@ label start:
 
     "Alright where was I..."
     "OH MY GOODNESS A STAT CHALLENGE!!!"
-    
-    if d20roll(stat_dex,2) == False:
+
+    $ roll = d20roll(stat_dex)
+    if roll > 20 :
+        pass
+    else:
         jump challenge_fail
 
     "Oh thank goodness I succeeded."
     "Now the game can continue."
-    
-    
+
+    return
+
 label challenge_fail:
+
     "YOU FUCKING FAILED AND SO YOU DIE AND SUCK HAHA"
+    return
 
 
 
