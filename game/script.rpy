@@ -1,17 +1,14 @@
 ﻿# The script of the game goes in this file.
 
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
-
 define gui.name_text_outlines = [(3, "#000000", 2, 2)]
-define guy = Character("Dr. Dick", outlines = [(3, "#000000", 2, 2)])
-define yol = Character("Madame von Dark", color = '#eb0000', outlines = [(3, "#000000", 2, 2)])
-define a = Character("some other npc", color = '#00e200', outlines = [(3, "#000000", 2, 2)])
+define guy = Character("You", outlines = [(3, "#000000", 2, 2)])
+define dame = Character("Widow", color = '#eb0000', outlines = [(3, "#000000", 2, 2)])
+define bart = Character("Bart Enderson", color = '#00e200', outlines = [(3, "#000000", 2, 2)])
 
-default stat_burl = 0
-default stat_wits = 0
-default stat_charm = 0
-default stat_dex = 0
+default stat_burl  = 8
+default stat_wits  = 8
+default stat_charm = 8
+default stat_dex   = 8
 default roll = 0
 
 init python:
@@ -23,54 +20,163 @@ init python:
 
 label start:
     
-    scene bg bar
-    show bar zorder 1
-    
-    "Another long night at the Rusty Pale."
-    "One last round, then I gotta pack it up for the night"
-    
-    show mike zorder 0:
-        linear 0.2 xpos 0.33 ypos -3
+    play music "Hard-Boiled.mp3" fadein 3.0
+
+    scene bg black
+
+    pause
+
+    "Eyelids stitched closed were the best at keeping the darkness out..."
+    "But a man cannot hide from his own shadow forever."
+
+    scene bg bar with Dissolve(1)
+
+    "There I was. Drowning the day away."
+    "I'd woken up at first light this morning, antsy at putting the case behind me. 
+        I'd been laboring over the details in my head even as I slept."
+    "Having put the pieces together around noon (the poor lad had been hanged in a practical joke 
+        gone wrong), the evidence was in the constabulary's hands by three o'clock."
+    "Didn't matter whose hands it was in..."
+
+    scene bg crimescene with Dissolve(1)
+
+    "Per usual, it would take a considerable washing to get it out from between the wrinkles of my mind."
+    "And, just as it is with paint and primer; alcohol was the best solution..."
+    "... One last bit of elbow grease."
+
+    scene bg bar with Dissolve(1)
+    show bar zorder 1:
+        ypos 1
+
+    guy "One last round, then I gotta pack it up for the night."
+    guy "{i}Hey, Bart!{w} Over here!{/i}"
+
+    show bart zorder 0:
+        xpos 0.20 yalign 2
+        linear 0.6 yalign 1
+
+    "Bartender" "Alright alright, I hear ya!"
+    "Bartender" "{i}What's your poison this time, Dick?{/i}"
 
     menu:
-        "What's it gonna be, Doc?"
         
         "Whiskey (+ BURLINESS)":
-            "Coming right up."
-            show whiskey zorder 2
-            "That's the stuff."
+
+            "Bartender" "Coming right up."
+
+            show whiskey zorder 2:
+                xpos -0.5
+                linear 0.9 xpos 0.5
+
+            "Bartender" "Orcish Fieldsman, 1255."
+            "Bartender" "If you didn't have hair on your chest by now, a shot of this will do it."
+
             hide whiskey with Dissolve(1)
+
             $ stat_burl += 1
+
+            guy "Braxis' beard! That's the real deal, ain't it."
+
+            "Bartender" "Told you."
+            "Bartender" "You could've asked for a chaser, you know.{w} Or a sapsparilla half 'n half..."
+            "Bartender" "But you hard-boiled types always order it straight, and it really puzzles me."
             
         "Beer (+ RESOLVE)":
-            "On it, boss."
-            show beer zorder 2
-            "That's what I'm talking about."
+
+            "Bartender" "On it, boss."
+
+            show beer zorder 2:
+                xpos -0.5
+                linear 0.9 xpos 0.5
+
+            "Bartender" "Authentic Dwarven Drakenslager, fresh off the tap."
+
+            guy "Wasting the good stuff on me, Bart? I'm flattered."
+
             hide beer with Dissolve(1)
-            $ stat_dex += 25
-            
+
+            $ stat_dex += 1
+
+            "Bartender" "Don't mention it."
+            "Bartender" "Seriously.{w} Do you know how hard this is to get,
+                the way trade relations are these days?"
+            "Bartender" "Do not.{w} Mention this."
+
         "Pina Colada (+ APPEAL)":
-            "Gettin' fruity with it, eh?"
-            show pinacolada zorder 2
-            "Where's my tiny umbrella?"
-            "We're out of the umbrellas."
-            "Can I at least get a toothpick sword?"
-            "Sure, boss."
+
+            "Bartender" "Gettin' fruity with it, eh?"
+
+            show pinacolada zorder 2:
+                xpos -0.5
+                linear 0.9 xpos 0.5
+
+            guy "Where's my tiny umbrella?"
+
+            "Bartender" "We're out of the umbrellas."
+
+            guy "Can I at least get a toothpick sword?"
+
+            "Bartender" "Sure, boss."
+
             show pinacolada sword
-            "Now I can enjoy this beverage fully."
+
+            guy "Now I can enjoy this beverage as Abraxas intended."
+
             hide pinacolada with Dissolve(1)
+
             $ stat_charm += 1
+
+            "Bartender" "Not gonna lie. That looked delicious. And I envy you."
+            "Bartender" "Just don't forget about your tab, alright."
+
+    guy "Anybody ever told you ya look like Arnold Arkengthanz?"
+    guy "I think it's the jawline, Bart."
+
+    "Bartender" "Only celebrity I look like is Bartholemew B. Enderson, chum."
+    bart "Because that's my name."
+    bart "And don't you forget it."
+    
+    show bart:
+        linear 1.0 xpos -0.5
+
+    "(bridge prose)"
+
+    "Excuse me."
+    "Sir, could I speak to you a moment?"
+    "I was so blasted, I figured I'd started hearing voices again."
+    "Then she stepped into frame."
+
+    show widow zorder 3:
+        xalign 1.5
+        linear 0.6 xalign 0.9
+
+    dame "I'm looking for a detective. Are you him?"
+    
+    guy "Yep I detect stuff for a living what's it to ya?"
+
+    dame "I need you to look into something for me."
+
+    "She spoke as if I were already hired...{p} 
+        As if I were a secretary pushing pencils and paperclips for a living."
+
+    dame "As you might already know, my husband recently passed..."
+
+
+label statchallenge_test:
 
     "Alright where was I..."
     "OH MY GOODNESS A STAT CHALLENGE!!!"
 
     $ roll = d20roll(stat_dex)
+
+    "{i}You rolled [roll]!{/i}"
+
     if roll > 20 :
         pass
     else:
         jump challenge_fail
 
-    "Oh thank goodness I succeeded."
+    "Oh thank goodness. I succeeded."
     "Now the game can continue."
 
     return
@@ -78,76 +184,11 @@ label start:
 label challenge_fail:
 
     "YOU FUCKING FAILED AND SO YOU DIE AND SUCK HAHA"
+
+    $ roll = d20roll(stat_dex)
+    "{i}You rolled [roll]!{/i}"
     return
 
-
-
-
-
-
-
-
-
-
-
-label vamp_route:
-    "Lets go to the bar in town"
-
-label thief_route:
-    "lets run an errand for the moldy mike"
-
-label necro_route:
-    "lets help this crazy guy"
-    
-label draft:
-
-    scene bg office
-    show mike
-
-    "I woke up to the sight of my ceiling."
-    "A terrible hangover."
-    "I could just barely make out the events of last night's drinking"
-    "then, a flash of memory. an open case."
-    "a well-dressed dame had come through the door of my office bawling her eyes out."
-    "somehting about a dead husband, or the grave of the husband, or something."
-    "grave robbers."
-    "somebody had dug up the coffin, took the stiff, and a few other valuables that were supposed to be with him"
-    "rotten stuff."
-    "I looked at the clock. I was about to be late, so i got up, and put my pants on."
-
-    scene bg town
-
-    "the sun was about to set already." 
-    "by the gods, how long had i been up drinking?"
-
-    scene bg gravesite
-
-    yol "took you long enough."
-
-    show yolanda
-
-    guy "i dont come out this way often."
-    guy "i forget how tricky the roads get."
-
-    yol "mhhmm...."
-
-    menu:
-
-        "say something stupid":
-            "duhhhh duhhhhhdoyyyy"
-            "uhhhhhhh fuuuuuu"
-
-        "say something intelligent":
-            "statistics show that most grave robbings are done by those who were closest to the corpse"
-            "we should ask those weirdos standing nearby"
-
-    yol "what a great idea."
-
-    scene bg lineup
-
-    "Suspect_1" "ahh crap I'm suspect 1"
-    "Suspect_2" "ahhh fuc im suspect 2"
-    "Suspect_3" "what the crap idk anything about this"
 
 label finale:
 
