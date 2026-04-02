@@ -30,6 +30,7 @@ label start:
     "But a man cannot hide from his own shadow forever."
 
     scene bg bar with Dissolve(1)
+    show bar foreground zorder 1 with Dissolve(1)
 
     "There I was. Drowning the day away."
     "I'd woken up at first light this morning, antsy at putting the case behind me. 
@@ -45,15 +46,14 @@ label start:
     "... One last bit of elbow grease."
 
     scene bg bar with Dissolve(1)
-    show bar zorder 1:
-        ypos 1
+    show bar foreground zorder 1
 
     guy "One last round, then I gotta pack it up for the night."
     guy "{i}Hey, Bart!{w} Over here!{/i}"
 
     show bart zorder 0:
-        xpos 0.20 yalign 2
-        linear 0.6 yalign 1
+        xysize(500, 880) xpos -0.5
+        easein 0.5 xpos 0.20 ypos 0.12
 
     "Bartender" "Alright alright, I hear ya!"
     "Bartender" "{i}What's your poison this time, Dick?{/i}"
@@ -65,11 +65,11 @@ label start:
             "Bartender" "Coming right up."
 
             show whiskey zorder 2:
-                xpos -0.5
-                linear 0.9 xpos 0.5
+                xpos -0.5 ypos 1.0
+                easein 0.8 xpos 0.4 ypos 0.61
 
             "Bartender" "Orcish Fieldsman, 1255."
-            "Bartender" "If you didn't have hair on your chest by now, a shot of this will do it."
+            "Bartender" "If you didn't have hair on your chest by now...{p}a shot of this will do it."
 
             hide whiskey with Dissolve(1)
 
@@ -78,7 +78,7 @@ label start:
             guy "Braxis' beard! That's the real deal, ain't it."
 
             "Bartender" "Told you."
-            "Bartender" "You could've asked for a chaser, you know.{w} Or a sapsparilla half 'n half..."
+            "Bartender" "You could've asked for a chaser, you know.{p}Or a sasparilla half 'n half..."
             "Bartender" "But you hard-boiled types always order it straight, and it really puzzles me."
             
         "Beer (+ RESOLVE)":
@@ -86,8 +86,8 @@ label start:
             "Bartender" "On it, boss."
 
             show beer zorder 2:
-                xpos -0.5
-                linear 0.9 xpos 0.5
+                xpos -0.6 ypos 1.0
+                easein 0.9 xpos 0.4 ypos 0.56
 
             "Bartender" "Authentic Dwarven Drakenslager, fresh off the tap."
 
@@ -107,8 +107,8 @@ label start:
             "Bartender" "Gettin' fruity with it, eh?"
 
             show pinacolada zorder 2:
-                xpos -0.5
-                linear 0.9 xpos 0.5
+                xpos -0.5 ypos 1.0
+                easein 0.8 xpos 0.4 ypos 0.53
 
             guy "Where's my tiny umbrella?"
 
@@ -118,7 +118,7 @@ label start:
 
             "Bartender" "Sure, boss."
 
-            show pinacolada sword
+            show pinacolada sword with Dissolve(0.5)
 
             guy "Now I can enjoy this beverage as Abraxas intended."
 
@@ -137,7 +137,7 @@ label start:
     bart "And don't you forget it."
     
     show bart:
-        linear 1.0 xpos -0.5
+        easeout 1 xpos -0.5 ypos 0.2
 
     "(bridge prose)"
 
@@ -147,8 +147,8 @@ label start:
     "Then she stepped into frame."
 
     show widow zorder 3:
-        xalign 1.5
-        linear 0.6 xalign 0.9
+        xpos 1.3 ypos 0.12
+        easein 1.2 xpos 0.48
 
     dame "I'm looking for a detective. Are you him?"
     
